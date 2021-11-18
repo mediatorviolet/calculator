@@ -24,30 +24,30 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="6" Background="#FF424242" Margin="10" HorizontalAlignment="Stretch" FontSize="16" TextAlignment="Center" Foreground="White" Text="" x:Name="ResultViewer"/>
+        <TextBlock Grid.ColumnSpan="6" Background="#FF424242" Margin="10" HorizontalAlignment="Stretch" FontSize="16" TextAlignment="Center" Foreground="White" Text="0" x:Name="ResultViewer"/>
         <Button Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" FontSize="16" Margin="5" x:Name="Backspace_Btn" Click="HandleBackspace_Btn">Retour arrière</Button>
         <Button Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" FontSize="16" Margin="5" x:Name="CE_Btn" Click="HandleCE_Btn">CE</Button>
         <Button Grid.Column="6" Grid.Row="1" FontSize="16" Margin="5,5,10,5" x:Name="C_Btn" Click="HandleC_Btn">C</Button>
         
-        <Button Grid.Column="1" Margin="5" Grid.Row="2" FontSize="16" x:Name="int7" Click="Handle_int">7</Button>
-        <Button Grid.Column="2" Margin="5" Grid.Row="2" FontSize="16" x:Name="int8" Click="Handle_int">8</Button>
-        <Button Grid.Column="3" Margin="5" Grid.Row="2" FontSize="16" x:Name="int9" Click="Handle_int">9</Button>
-        <Button Grid.Column="4" Margin="5" Grid.Row="2" FontSize="16" x:Name="Operator_Div" Click="Handle_Operator">/</Button>
+        <Button Grid.Column="1" Margin="5" Grid.Row="2" FontSize="16" x:Name="int7" Click="Handle_IntBtn">7</Button>
+        <Button Grid.Column="2" Margin="5" Grid.Row="2" FontSize="16" x:Name="int8" Click="Handle_IntBtn">8</Button>
+        <Button Grid.Column="3" Margin="5" Grid.Row="2" FontSize="16" x:Name="int9" Click="Handle_IntBtn">9</Button>
+        <Button Grid.Column="4" Margin="5" Grid.Row="2" FontSize="16" x:Name="Operator_Div" Click="Handle_Btn">/</Button>
 
-        <Button Grid.Column="1" Margin="5" Grid.Row="3" FontSize="16" x:Name="int4" Click="Handle_int">4</Button>
-        <Button Grid.Column="2" Margin="5" Grid.Row="3" FontSize="16" x:Name="int5" Click="Handle_int">5</Button>
-        <Button Grid.Column="3" Margin="5" Grid.Row="3" FontSize="16" x:Name="int6" Click="Handle_int">6</Button>
-        <Button Grid.Column="4" Margin="5" Grid.Row="3" FontSize="16" x:Name="Operator_Mult" Click="Handle_Operator">*</Button>
+        <Button Grid.Column="1" Margin="5" Grid.Row="3" FontSize="16" x:Name="int4" Click="Handle_IntBtn">4</Button>
+        <Button Grid.Column="2" Margin="5" Grid.Row="3" FontSize="16" x:Name="int5" Click="Handle_IntBtn">5</Button>
+        <Button Grid.Column="3" Margin="5" Grid.Row="3" FontSize="16" x:Name="int6" Click="Handle_IntBtn">6</Button>
+        <Button Grid.Column="4" Margin="5" Grid.Row="3" FontSize="16" x:Name="Operator_Mult" Click="Handle_Btn">*</Button>
 
-        <Button Grid.Column="1" Margin="5" Grid.Row="4" FontSize="16" x:Name="int1" Click="Handle_int">1</Button>
-        <Button Grid.Column="2" Margin="5" Grid.Row="4" FontSize="16" x:Name="int2" Click="Handle_int">2</Button>
-        <Button Grid.Column="3" Margin="5" Grid.Row="4" FontSize="16" x:Name="int3" Click="Handle_int">3</Button>
-        <Button Grid.Column="4" Margin="5" Grid.Row="4" FontSize="16" x:Name="Operator_Minus" Click="Handle_Operator">-</Button>
+        <Button Grid.Column="1" Margin="5" Grid.Row="4" FontSize="16" x:Name="int1" Click="Handle_IntBtn">1</Button>
+        <Button Grid.Column="2" Margin="5" Grid.Row="4" FontSize="16" x:Name="int2" Click="Handle_IntBtn">2</Button>
+        <Button Grid.Column="3" Margin="5" Grid.Row="4" FontSize="16" x:Name="int3" Click="Handle_IntBtn">3</Button>
+        <Button Grid.Column="4" Margin="5" Grid.Row="4" FontSize="16" x:Name="Operator_Minus" Click="Handle_Btn">-</Button>
 
-        <Button Grid.Column="1" Margin="5" Grid.Row="5" FontSize="16" x:Name="int0" Click="Handle_int">0</Button>
-        <Button Grid.Column="2" Margin="5" Grid.Row="5" FontSize="16" x:Name="PosOrNeg">+/-</Button>
-        <Button Grid.Column="3" Margin="5" Grid.Row="5" FontSize="16" x:Name="Dot">.</Button>
-        <Button Grid.Column="4" Margin="5" Grid.Row="5" FontSize="16" x:Name="Operator_Plus" Click="Handle_Operator">+</Button>
+        <Button Grid.Column="1" Margin="5" Grid.Row="5" FontSize="16" x:Name="int0" Click="Handle_IntBtn">0</Button>
+        <Button Grid.Column="2" Margin="5" Grid.Row="5" FontSize="16" x:Name="PosOrNeg" Click="Handle_Btn">+/-</Button>
+        <Button Grid.Column="3" Margin="5" Grid.Row="5" FontSize="16" x:Name="Dot" Click="Handle_Btn">.</Button>
+        <Button Grid.Column="4" Margin="5" Grid.Row="5" FontSize="16" x:Name="Operator_Plus" Click="Handle_Btn">+</Button>
         <Button Grid.Column="5" Margin="5,5,10,5" Grid.Row="5" FontSize="16" x:Name="Operator_Equal" Click="Evaluate">=</Button>
     </Grid>
 </Window>
