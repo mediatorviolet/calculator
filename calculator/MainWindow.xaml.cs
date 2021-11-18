@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace calculator
 {
@@ -21,6 +11,7 @@ namespace calculator
     public partial class MainWindow : Window
     {
         public string total = "0";
+        private string subTotal;
         public MainWindow()
         {
             InitializeComponent();
@@ -64,78 +55,145 @@ namespace calculator
             {
                 total = "";
             }
-            
+
             total += b.Content;
             ResultViewer.Text = total;
         }
 
-        private void Handle_Operator(object sender, RoutedEventArgs e)
+        private void Handle_Operatorr(object sender, RoutedEventArgs e)
         {
-            char[] operators = {'/', '*', '-', '+'};
+            char[] operators = { '/', '*', '-', '+' };
             char c = total.Last();
             int pos = Array.IndexOf(operators, c);
-            System.Diagnostics.Debug.WriteLine("----------------------------");
+            Button b = (Button)sender;
+
+            subTotal = total + b.Content;
+            total = "";
+        }
+
+        private void Handle_Operator(object sender, RoutedEventArgs e)
+        {
+            char[] operators = { '/', '*', '-', '+' };
+            char c = total.Last();
+            int pos = Array.IndexOf(operators, c);
+            /*System.Diagnostics.Debug.WriteLine("----------------------------");
             System.Diagnostics.Debug.WriteLine(c);
-            System.Diagnostics.Debug.WriteLine(pos);
+            System.Diagnostics.Debug.WriteLine(pos);*/
+            int iOp;
 
             Button b = (Button)sender;
-            if (pos == -1)
+            if (!operators.Any(total.Contains))
             {
-                switch (b.Content)
+                subTotal = total + b.Content;
+                total = "";
+                System.Diagnostics.Debug.WriteLine(total);
+            }
+            else
+            {
+                if (total.Contains("+"))
                 {
-                    case "/":
-                        total += "/";
-                        System.Diagnostics.Debug.WriteLine(total);
-                        break;
-                    case "*":
-                        total += "*";
-                        System.Diagnostics.Debug.WriteLine(total);
-                        break;
-                    case "-":
-                        total += "-";
-                        System.Diagnostics.Debug.WriteLine(total);
-                        break;
-                    case "+":
-                        total += "+";
-                        System.Diagnostics.Debug.WriteLine(total);
-                        break;
-                    default:
-                        break;
+                    iOp = total.IndexOf("+");
+                }
+                else if (total.Contains("-"))
+                {
+                    iOp = total.IndexOf("-");
+                }
+                else if (total.Contains("*"))
+                {
+                    iOp = total.IndexOf("*");
+                }
+                else if (total.Contains("/"))
+                {
+                    iOp = total.IndexOf("/");
+                }
+                else
+                {
+                    iOp = -1;
+                }
+                double op1 = Convert.ToDouble(total[..iOp]);
+                double op2 = Convert.ToDouble(total.Substring(iOp + 1, total.Length - 2));
+
+                if (total.Contains('+'))
+                {
+                    total = (op1 + op2).ToString() + b.Content;
+                }
+                else if (total.Contains('-'))
+                {
+                    total = (op1 - op2).ToString() + b.Content;
+                }
+                else if (total.Contains('*'))
+                {
+                    total = (op1 * op2).ToString() + b.Content;
+                }
+                else if (total.Contains('/'))
+                {
+                    total = (op1 / op2).ToString() + b.Content;
                 }
             }
+            System.Diagnostics.Debug.WriteLine(total);
+            ResultViewer.Text = total;
         }
 
-        private void Divide(string s)
+        private void Result()
         {
-            int acc = 0;
-            char op = '/';
+            string op;
+            int iOp = 0;
 
-            while (s.Contains(op))
+            if (total.Contains("+"))
             {
-                int iOp = s.IndexOf(op);
-                acc += s[iOp - 1] / s[iOp + 1];
-                System.Diagnostics.Debug.WriteLine(iOp);
-                s = s.Remove(iOp - 1, 3);
-                s = s.Insert(iOp - 1, acc.ToString());
-                acc = 0;
+                iOp = total.IndexOf("+");
             }
-            System.Diagnostics.Debug.WriteLine(s);
-        }
+            else if (total.Contains("-"))
+            {
+                iOp = total.IndexOf("-");
+            }
+            else if (total.Contains("*"))
+            {
+                iOp = total.IndexOf("*");
+            }
+            else if (total.Contains("/"))
+            {
+                iOp = total.IndexOf("/");
+            }
+            else
+            {
+                // Error
+            }
 
-        private int DivideAndMultiply(string c)
-        {
-            int acc = 0;
-            char[] operators = { '/', '*' };
-            while(c.Contains(operators[0]) || c.Contains(operators[1]))
+            op = total.Substring(iOp, 1);
+            double op1 = Convert.ToDouble(total.Substring(0, iOp));
+            double op2 = Convert.ToDouble(total.Substring(iOp + 1, total.Length - iOp - 1));
+
+            switch (op)
             {
-                int operatorIndex = c.IndexOf('/');
+                case "+":
+                    total += "=" + (op1 + op2);
+                    break;
+                case "-":
+                    total += "=" + (op1 - op2);
+                    break;
+                case "*":
+                    total += "=" + (op1 * op2);
+                    break;
+                case "/":
+                    total += "=" + (op1 / op2);
+                    break;
+                default:
+                    break;
             }
-            return 0;
+            ResultViewer.Text = total;
         }
 
         private void Evaluate(object sender, RoutedEventArgs e)
         {
-            Divide(total);
+            try
+            {
+                Result();
+            }
+            catch (Exception ex)
+            {
+                ResultViewer.Text = "Error: " + ex;
+            }
         }
     }
 }
