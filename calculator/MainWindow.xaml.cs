@@ -22,8 +22,6 @@ namespace calculator
 
         private void HandleBackspace_Btn(object sender, RoutedEventArgs e)
         {
-            // Si ça marche pas on puet essayer de faire les opérations sur 
-            // `ResultViewer.Text` et update `total` à la fin 
             if (total != 0)
             {
                 total = Convert.ToDouble(total.ToString().Remove(ResultViewer.Text.Length - 1));
@@ -65,6 +63,16 @@ namespace calculator
         private void UpdateViewer(double d)
         {
             ResultViewer.Text = d.ToString();
+            try
+            {
+                System.Diagnostics.Debug.WriteLine(opHistory[0]);
+                System.Diagnostics.Debug.WriteLine(opHistory[1]);
+                System.Diagnostics.Debug.WriteLine(opHistory[2]);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
         }
 
         private void HandleCE_Btn(object sender, RoutedEventArgs e)
@@ -161,7 +169,39 @@ namespace calculator
 
         private void Evaluate(object sender, RoutedEventArgs e)
         {
-
+            double tmpTotal = 0;
+            opHistory.Add(total.ToString());
+            if (opHistory.Count == 3)
+            {
+                switch (opHistory[1])
+                {
+                    case "+":
+                        tmpTotal = Convert.ToDouble(opHistory[0]) + Convert.ToDouble(opHistory[2]);
+                        break;
+                    case "-":
+                        tmpTotal = Convert.ToDouble(opHistory[0]) - Convert.ToDouble(opHistory[2]);
+                        break;
+                    case "*":
+                        tmpTotal = Convert.ToDouble(opHistory[0]) * Convert.ToDouble(opHistory[2]);
+                        break;
+                    case "/":
+                        if (opHistory[2] == "0")
+                        {
+                            SoftReset();
+                            ResultViewer.Text = "Erreur : Division par 0... UwU";
+                        }
+                        else
+                        {
+                            tmpTotal = Convert.ToDouble(opHistory[0]) / Convert.ToDouble(opHistory[2]);
+                        }
+                        break;
+                }
+                opHistory.Clear();
+                //opHistory.Add(tmpTotal.ToString());
+                total = tmpTotal;
+                UpdateViewer(total);
+                //doneOp = true;
+            }
         }
     }
 }
